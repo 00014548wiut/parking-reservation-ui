@@ -1,0 +1,7 @@
+.nav-link {
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
