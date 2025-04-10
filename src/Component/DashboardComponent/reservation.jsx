@@ -59,20 +59,23 @@ function Reservations() {
     }
   };
 
-  // Fetch Locations
-  const fetchLocations = async () => {
-    try {
-      const data = await apiCall({
-        //endpoint: "/api/Locations/GetAll",
-        endpoint: `/api/Locations/GetAllLocationByID?id=${user.id}`,
-        method: "GET",
-        isAuthenticated: true,
-      });
-      setLocations(data);
-    } catch (err) {
-      setError("Failed to fetch locations.");
-    }
-  };
+ // Fetch Locations
+ const fetchLocations = async () => {
+  try {
+    const endpoint =
+      user?.userRole === "LOCALADMIN"
+        ? `/api/Locations/GetAllLocationByID?id=${user.id}`
+        : "/api/Locations/GetAll";
+    const data = await apiCall({
+      endpoint: endpoint,
+      method: "GET",
+      isAuthenticated: true,
+    });
+    setLocations(data);
+  } catch (err) {
+    setError("Failed to fetch locations.");
+  }
+};
 
   const fetchLocationsById = async (id) => {
     try {
