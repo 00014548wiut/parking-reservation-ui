@@ -104,9 +104,13 @@ const Register = () => {
                                     {...register('password', {
                                         required: 'Password is required',
                                         minLength: {
-                                            value: 6,
-                                            message: 'Password must be at least 6 characters long',
+                                            value: 10,
+                                            message: 'Password must be at least 10 characters long',
                                         },
+                                        pattern: {
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).[6,]$/,
+                                            message: 'Password must contain at least one uppercase letter, one lowercase, and one number',
+                                        }
                                     })}
                                 />
                                 {errors.password && <p className="text-danger">{errors.password.message}</p>}
